@@ -1,0 +1,15 @@
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
+
+import java.util.List;
+
+public interface ProductMapper extends BaseMapper<Product> {
+
+    // 自定义 SQL 查询方法，查询商品及其供货商信息
+    @Select("SELECT p.*, s.* FROM product p " +
+            "LEFT JOIN product_supplier ps ON p.id = ps.product_id " +
+            "LEFT JOIN supplier s ON ps.supplier_id = s.id " +
+            "WHERE p.id = #{productId}")
+    Product getProductWithSuppliers(@Param("productId") Long productId);
+}

@@ -1,0 +1,43 @@
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+@Service
+public class ProductService {
+    private final ProductMapper productMapper;
+
+    public ProductService(ProductMapper productMapper) {
+        this.productMapper = productMapper;
+    }
+
+    public List<Product> getAllProducts() {
+        return productMapper.selectList(null);
+    }
+
+    public Product getProductById(Long id) {
+        return productMapper.selectById(id);
+    }
+
+    public Product createProduct(Product product) {
+        productMapper.insert(product);
+        return product;
+    }
+
+    public Product updateProduct(Long id, Product updatedProduct) {
+        updatedProduct.setId(id);
+        productMapper.updateById(updatedProduct);
+        return updatedProduct;
+    }
+
+    public void deleteProduct(Long id) {
+        productMapper.deleteById(id);
+    }
+
+    // 编写方法来获取商品及其供货商信息的查询
+    public Product getProductWithSuppliers(Long productId) {
+        // 实现根据商品ID查询商品及其供货商信息的逻辑
+        // 这里使用自定义SQL或者MyBatis Plus的Wrapper实现多表查询
+        // 注意处理逻辑和映射关系
+        return productMapper.getProductWithSuppliers(productId);
+    }
+}
