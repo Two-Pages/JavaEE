@@ -1,0 +1,5 @@
+<beans>
+    <bean id="userService" class="com.example.UserService">
+        <property name="message" value="Hello, this is a message."/>
+    </bean>
+</beans>
